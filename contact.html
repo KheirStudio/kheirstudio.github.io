@@ -87,6 +87,7 @@ button span{font-size:15px;line-height:1;text-transform:none;letter-spacing:0}
 .or a:hover{opacity:.7}
 
 footer{padding:22px 0 30px;color:var(--faint);font-size:11px;text-align:center}
+.legal{margin-top:7px;font-size:10px;line-height:1.6;color:#3a3a44}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
@@ -137,12 +138,14 @@ footer{padding:22px 0 30px;color:var(--faint);font-size:11px;text-align:center}
         <p class="note" id="note" role="status" aria-live="polite"></p>
       </form>
 
-      <p class="or">Or email <a href="mailto:hello@kheirstudio.com">hello@kheirstudio.com</a></p>
+      <p class="or">Or email <a href="mailto:hello@instantstudio.net">hello@instantstudio.net</a></p>
     </div>
   </main>
 
   <footer>
-    <div class="wrap">&copy; <span id="year">2026</span> Kheir Studio Limited</div>
+    <div class="wrap">&copy; <span id="year">2026</span> Kheir Studio Limited
+      <p class="legal">Kheir Studio Limited (17341526) &middot; 60 Office, London, England, W1T 2EW</p>
+    </div>
   </footer>
 
 </div>
@@ -164,7 +167,7 @@ footer{padding:22px 0 30px;color:var(--faint);font-size:11px;text-align:center}
       var subject = encodeURIComponent('Enquiry from ' + (form.name.value || 'the website'));
       var body = encodeURIComponent(
         form.message.value + '\n\n' + form.name.value + ' (' + form.email.value + ')');
-      window.location.href = 'mailto:hello@kheirstudio.com?subject=' + subject + '&body=' + body;
+      window.location.href = 'mailto:hello@instantstudio.net?subject=' + subject + '&body=' + body;
       return;
     }
 
@@ -183,7 +186,7 @@ footer{padding:22px 0 30px;color:var(--faint);font-size:11px;text-align:center}
       note.textContent = 'Thanks. We will be in touch.';
     }).catch(function () {
       note.className = 'note err';
-      note.textContent = 'That did not send. Please email hello@kheirstudio.com instead.';
+      note.textContent = 'That did not send. Please email hello@instantstudio.net instead.';
     }).finally(function () { send.disabled = false; });
   });
 })();
