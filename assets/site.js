@@ -42,6 +42,30 @@
     tick(); setInterval(tick, 20000);
   }
 
+  /* the logo's dot in the header. The nav blends with the page (one colour over paper or the dark band),
+     so a true accent dot is laid over the logo's own, and turns the night accent over a dark band. */
+  var kdot = document.querySelector('.nav .k-dot'), navEl = document.getElementById('nav'), navDot = null, nights = all('.night');
+  function placeNavDot(){
+    var r = kdot.getBoundingClientRect(), n = navEl.getBoundingClientRect();
+    navDot.style.left = r.left + 'px'; navDot.style.top = (r.top - n.top) + 'px';
+    navDot.style.width = r.width + 'px'; navDot.style.height = r.height + 'px';
+  }
+  function shadeNavDot(){
+    var y = parseFloat(navDot.style.top) + parseFloat(navDot.style.height) / 2, dark = false;
+    for (var i = 0; i < nights.length; i++) { var b = nights[i].getBoundingClientRect(); if (b.top <= y && b.bottom >= y) dark = true; }
+    navDot.classList.toggle('on-dark', dark);
+  }
+  if (kdot && navEl) {
+    navDot = document.createElement('span');
+    navDot.className = 'nav-dot'; navDot.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(navDot);
+    root.classList.add('has-nav-dot');
+    placeNavDot(); shadeNavDot();
+    addEventListener('resize', function(){ placeNavDot(); shadeNavDot(); });
+    addEventListener('scroll', shadeNavDot, { passive: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeNavDot);
+  }
+
   /* menu on phones. Without JavaScript the button is a link to the footer links. */
   var menuBtn = document.querySelector('.nav-menu'), menu = document.getElementById('menu');
   var shut = all('main, footer');
@@ -79,12 +103,8 @@
     var ENDPOINT = 'https://bfzckjrctwlllpohgtqn.supabase.co/functions/v1/contact-form';
     var ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmemNranJjdHdsbGxwb2hndHFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3MzQyNTUsImV4cCI6MjA5MDMxMDI1NX0.cmPuOca1kSPt48aBZuK-6yjpRTdvW4BaKt0vap03NNg';
     var f = form.elements, name = f.namedItem('name'), email = f.namedItem('email'), msg = f.namedItem('message');
-    var who = f.namedItem('role'), handle = f.namedItem('handle');
+    var handle = f.namedItem('handle');
     var status = document.getElementById('form-status'), send = document.getElementById('send'), sent = document.getElementById('sent');
-
-    /* ?as=creator, founder or business preselects "I am a" */
-    var as = new URLSearchParams(location.search).get('as');
-    if (['creator', 'founder', 'business'].indexOf(as) > -1) who.value = as;
 
     function mark(field, text){
       var e = document.getElementById(field.id + '-e');
@@ -112,8 +132,8 @@
       }
       if (f.namedItem('_gotcha').value) return; /* honeypot: only bots fill it */
 
-      /* the endpoint takes name, email, subject and message only, so "I am a" and the handle lead the message */
-      var tag = (who.value ? '[' + who.options[who.selectedIndex].text + '] ' : '') + (handle.value.trim() ? '[' + handle.value.trim() + '] ' : '');
+      /* the endpoint takes name, email, subject and message only, so the website or handle leads the message */
+      var tag = handle.value.trim() ? '[' + handle.value.trim() + '] ' : '';
       send.disabled = true;
       send.firstChild.nodeValue = 'Sending';
       send.lastElementChild.hidden = true;
@@ -156,9 +176,10 @@
     Array.prototype.slice.call(node.childNodes).forEach(function(n){
       if (n.nodeType === 3) {
         var frag = document.createDocumentFragment();
-        n.textContent.split(/(\s+)/).forEach(function(part){
+        /* split on ordinary spaces only, so a non-breaking space keeps two words together */
+        n.textContent.split(/([ \t\r\n]+)/).forEach(function(part){
           if (!part) return;
-          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+          if (/^[ \t\r\n]+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
           var s = document.createElement('span'); s.className = 'w'; s.textContent = part;
           frag.appendChild(s); words.push(s);
         });
@@ -311,7 +332,12 @@
     var y = scrollY;
 
     /* nav hides going down, returns going up */
-    if (nav && Math.abs(y - lastY) > 6) { nav.classList.toggle('is-hidden', y > lastY && y > 240 && !root.classList.contains('menu-open')); lastY = y; }
+    if (nav && Math.abs(y - lastY) > 6) {
+      var hide = y > lastY && y > 240 && !root.classList.contains('menu-open');
+      nav.classList.toggle('is-hidden', hide);
+      if (navDot) navDot.classList.toggle('is-hidden', hide);
+      lastY = y;
+    }
 
     /* words light up as the paragraph passes */
     if (st) {
