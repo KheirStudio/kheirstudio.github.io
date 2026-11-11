@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact · K Studio</title>
+<meta name="description" content="Start a conversation with K Studio. Ask for a free audit of your page, your product idea or your process.">
+<link rel="canonical" href="https://kheirstudio.com/contact/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="K Studio">
+<meta property="og:title" content="Contact · K Studio">
+<meta property="og:description" content="Start a conversation with K Studio. Ask for a free audit of your page, your product idea or your process.">
+<meta property="og:url" content="https://kheirstudio.com/contact/">
+<meta property="og:image" content="https://kheirstudio.com/assets/og/contact.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="K Studio. Start a conversation.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F3F0E9">
+<link rel="icon" href="/assets/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="dot" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="/" aria-label="K Studio, home"><svg viewBox="15 9 39 46" width="21" height="25" aria-hidden="true"><rect x="15" y="9" width="12" height="46"/><path d="M27 31 39 9h14L33 42h-6z"/><circle class="k-dot" cx="45" cy="46" r="9"/></svg><i aria-hidden="true"></i><span>K Studio</span></a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="/creators/">Creators</a>
+      <a href="/products/">Products</a>
+      <a href="/ai/">AI for business</a>
+      <a href="/about/">About</a>
+    </nav>
+    <a class="nav-cta" href="/contact/">Start a conversation</a>
+    <a class="nav-menu" href="#footer-nav" aria-controls="menu">Menu</a>
+  </div>
+</header>
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menu">
+    <a href="/" style="--i:0">Home</a>
+    <a href="/creators/" style="--i:1">Creators</a>
+    <a href="/products/" style="--i:2">Products</a>
+    <a href="/ai/" style="--i:3">AI for business</a>
+    <a href="/about/" style="--i:4">About</a>
+  </nav>
+  <div>
+    <a class="btn" href="/contact/">Start a conversation <span aria-hidden="true">→</span></a>
+    <p class="menu-legal mono">K Studio is a trading name of Kheir Studio Limited · Company no. 17341526 · 124 City Road, London, EC1V 2NX</p>
+  </div>
+</div>
+
+<main id="main">
+  <!-- HERO -->
+  <div class="hero hero--page wrap" id="top">
+    <p class="hero-meta mono"><span>K Studio / Contact</span><span>London <span data-clock>00:00</span></span></p>
+    <h1>
+      <span class="line"><span class="line-in" style="--i:0">Start a</span></span>
+      <span class="line"><span class="line-in" style="--i:1"><em>conversation</em><span class="dot-anchor" data-c="accent"></span></span></span>
+    </h1>
+    <div class="hero-foot">
+      <p class="lede">A few lines is enough. It goes straight to Ridwan.</p>
+    </div>
+  </div>
+
+  <!-- 01 TELL US -->
+  <section class="wrap" id="tell-us">
+    <p class="label mono"><span class="dot-anchor dot-anchor--sm" data-c="accent"></span><b>01</b>Tell us</p>
+    <p class="nojs">This form needs JavaScript to send.</p>
+    <form class="form" id="contact-form" method="post" action="#" novalidate>
+      <div class="field">
+        <label class="field-l" for="name">Your name</label>
+        <input class="input" id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-e">
+        <p class="field-e" id="name-e"></p>
+      </div>
+      <div class="field">
+        <label class="field-l" for="email">Your email</label>
+        <input class="input" id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-e">
+        <p class="field-e" id="email-e"></p>
+      </div>
+      <div class="field">
+        <label class="field-l" for="role">I am a</label>
+        <div class="select">
+          <select class="input" id="role" name="role">
+            <option value="">Choose one</option>
+            <option value="creator">Creator</option>
+            <option value="founder">Founder with a product idea</option>
+            <option value="business">Business looking at AI</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-l" for="handle">Your Instagram, channel or website <small>(optional)</small></label>
+        <input class="input" id="handle" name="handle" type="text" autocomplete="off">
+      </div>
+      <div class="field">
+        <label class="field-l" for="message">What do you have in mind?</label>
+        <textarea class="input" id="message" name="message" rows="5" required aria-describedby="message-e"></textarea>
+        <p class="field-e" id="message-e"></p>
+      </div>
+      <!-- Bots fill hidden fields; people never see this one. -->
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="form-foot">
+        <button class="btn" id="send" type="submit">Send <span aria-hidden="true">→</span></button>
+        <p class="form-note" id="form-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+    <p class="form-ok" id="sent" tabindex="-1" hidden>Sent. You will hear from Ridwan directly.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="wrap cta" id="contact">
+    <p class="cta-big" aria-label="Talk soon.">Talk soon<span class="dot-anchor" data-c="accent"></span></p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="foot">
+    <a class="brand" href="/" aria-label="K Studio, home"><svg viewBox="15 9 39 46" width="21" height="25" aria-hidden="true"><rect x="15" y="9" width="12" height="46"/><path d="M27 31 39 9h14L33 42h-6z"/><circle class="k-dot" cx="45" cy="46" r="9"/></svg><i aria-hidden="true"></i><span>K Studio</span></a>
+    <nav class="foot-nav" id="footer-nav" aria-label="Footer">
+      <a href="/creators/">Creators</a>
+      <a href="/products/">Products</a>
+      <a href="/ai/">AI for business</a>
+      <a href="/about/">About</a>
+      <a href="/contact/" aria-current="page">Contact</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+  </div>
+  <p class="foot-legal mono"><span>&copy; <span id="year">2026</span> K Studio</span><span>K Studio is a trading name of Kheir Studio Limited · Company no. 17341526 · 124 City Road, London, EC1V 2NX</span></p>
+</footer>
+
+<script src="/assets/site.js"></script>
+</body>
+</html>
