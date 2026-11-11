@@ -21,7 +21,7 @@
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.KS)document.documentElement.classList.add('no-anim')},3000)</script>
 <link rel="stylesheet" href="/assets/site.css">
 <script type="application/ld+json">
 {
@@ -73,7 +73,7 @@
 <main id="main">
   <!-- HERO -->
   <div class="hero wrap" id="top">
-    <p class="hero-meta mono"><span>Product studio / London</span><span>London <span data-clock>00:00</span></span></p>
+    <p class="hero-meta mono"><span>Product studio / London</span><span class="clock">London <time data-clock>--:--</time></span></p>
     <h1>
       <span class="line"><span class="line-in" style="--i:0">Your business has</span></span>
       <span class="line"><span class="line-in" style="--i:1"><em>more in it</em><span class="dot-anchor" data-c="accent"></span></span></span>

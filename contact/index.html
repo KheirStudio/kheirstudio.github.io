@@ -21,7 +21,7 @@
 <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
-<script>document.documentElement.classList.add('js')</script>
+<script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.KS)document.documentElement.classList.add('no-anim')},3000)</script>
 <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
@@ -59,7 +59,7 @@
 <main id="main">
   <!-- HERO -->
   <div class="hero hero--page wrap" id="top">
-    <p class="hero-meta mono"><span>K Studio / Contact</span><span>London <span data-clock>00:00</span></span></p>
+    <p class="hero-meta mono"><span>K Studio / Contact</span><span class="clock">London <time data-clock>--:--</time></span></p>
     <h1>
       <span class="line"><span class="line-in" style="--i:0">Start a</span></span>
       <span class="line"><span class="line-in" style="--i:1"><em>conversation</em><span class="dot-anchor" data-c="accent"></span></span></span>

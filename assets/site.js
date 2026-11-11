@@ -1,4 +1,5 @@
 (function(){
+  window.KS = 1; /* tells the failsafe in each page's head that this script arrived */
   var root = document.documentElement;
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   var vh = innerHeight;
@@ -28,18 +29,33 @@
     if (document.visibilityState === 'visible' && (!t || t < 50)) root.classList.add('no-anim');
   }, 2600);
 
-  /* reveal on scroll */
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-  }, { rootMargin: '0px 0px -10% 0px', threshold: .01 });
-  all('[data-reveal]').forEach(function(el){ io.observe(el); });
+  /* reveal on scroll (a browser without IntersectionObserver just shows everything) */
+  var hasIO = 'IntersectionObserver' in window;
+  if (hasIO) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: .01 });
+    all('[data-reveal]').forEach(function(el){ io.observe(el); });
+  } else {
+    all('[data-reveal]').forEach(function(el){ el.classList.add('is-in'); });
+  }
 
-  /* London clock */
-  var clock = document.querySelector('[data-clock]');
-  if (clock) {
-    var fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/London' });
-    var tick = function(){ clock.textContent = fmt.format(new Date()); };
-    tick(); setInterval(tick, 20000);
+  /* London clock: changes exactly on the minute, and at once when the page comes back into view
+     (background tabs slow their timers, and a page restored with Back keeps its old time) */
+  var clocks = all('[data-clock]');
+  if (clocks.length) {
+    var fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'Europe/London' });
+    var clockTimer = 0;
+    var tick = function(){
+      var now = new Date(), t = fmt.format(now);
+      clocks.forEach(function(c){ if (c.textContent !== t) { c.textContent = t; c.setAttribute('datetime', now.toISOString()); } });
+      clearTimeout(clockTimer);
+      clockTimer = setTimeout(tick, 60000 - now.getTime() % 60000 + 30);
+    };
+    tick();
+    document.addEventListener('visibilitychange', function(){ if (!document.hidden) tick(); });
+    addEventListener('pageshow', tick);
+    addEventListener('focus', tick);
   }
 
   /* the logo's dot in the header. The nav blends with the page (one colour over paper or the dark band),
@@ -92,7 +108,8 @@
     menuBtn.addEventListener('keydown', function(e){ if (e.key === ' ') { e.preventDefault(); setMenu(menu.hidden); } });
     addEventListener('keydown', function(e){ if (e.key === 'Escape' && !menu.hidden) { setMenu(false); menuBtn.focus(); } });
     all('a', menu).forEach(function(a){ a.addEventListener('click', function(){ if (a.hash && a.pathname === location.pathname) setMenu(false); }); });
-    matchMedia('(min-width: 761px)').addEventListener('change', function(m){ if (m.matches && !menu.hidden) setMenu(false); });
+    var wide = matchMedia('(min-width: 761px)'), onWide = function(m){ if (m.matches && !menu.hidden) setMenu(false); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide); else if (wide.addListener) wide.addListener(onWide);
   }
 
   /* contact form */
@@ -193,6 +210,7 @@
     var input = ba.querySelector('input');
     function set(v){ ba.style.setProperty('--pos', v + '%'); }
     input.addEventListener('input', function(){ set(input.value); });
+    if (!hasIO) return;
     new IntersectionObserver(function(es, o){
       if (!es[0].isIntersecting) return;
       o.disconnect();

@@ -21,7 +21,7 @@
   --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:84px}
 html.menu-open{overflow:hidden}
 body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;
   -webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -100,6 +100,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.0
 .hero--page{min-height:82svh}
 .hero--short{min-height:0;padding-top:clamp(130px,17vw,240px);padding-bottom:0}
 .hero-meta{display:flex;justify-content:space-between;gap:20px;color:var(--mut)}
+html:not(.js) .clock{display:none}
 h1{font-weight:500;font-size:clamp(40px,11.2vw,184px);line-height:.9;letter-spacing:-.05em;margin:22px 0 0 -.04em}
 .h1--long{font-size:clamp(35px,6.9vw,96px)}
 .line{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
